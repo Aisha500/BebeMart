@@ -1,0 +1,54 @@
+Project Name: BebeMart – The 5k Kids’ Thrift Marketplace
+
+Core Concept: A hyper-local, mobile-responsive web app for buying and selling pre-loved kids' items (clothes, shoes, toys, gear).
+
+The "Golden Rule": No item can be listed for more than 5,000 NGN.
+
+Gift-It-Forward: A special "0 NGN" category where items are free, but the buyer pays a 500 NGN "Platform Fee" + delivery.
+
+Escrow System: Payments are held by BebeMart until the buyer confirms receipt.
+
+User Personas:
+
+Sellers: Parents clearing clutter. They can upload photos (required) and a 5-second video (optional), set prices (max 5k), and select item condition.
+
+Buyers: Parents seeking affordability. They can browse, filter, and chat with sellers.
+
+Technical Requirements:
+
+Marketplace Engine: - Grid-view of listings with clear price tags.
+
+Filters: Age (0-6m, 6-12m, 1-3y, 4-6y, 7y+), Category (Clothes, Shoes, Toys, Gear, Books), and Location (State/City).
+
+Escrow Logic: A "Buy Now" button that triggers a payment flow. The status should move from: "Paid (In Escrow)" -> "Shipped" -> "Received/Released" -> "Completed."
+
+Communication: Basic in-app messaging for buyers and sellers to discuss pickup/delivery.
+
+Trust Layer: Star ratings and text reviews for sellers after a completed transaction.
+
+UI/UX & Design Vibe:
+
+Colors: Soft Mint Green, Sky Blue, and Lemon Yellow (Gender-neutral, cheerful, and trustworthy).
+
+Copywriting Style: Simple, warm, and community-focused.
+
+Example Header: "Quality kids' gear, never more than 5k."
+
+Example Button: "Grab this for 0 NGN (Gift-It-Forward)"
+
+Responsiveness: Mobile-first design (bottom navigation bar for mobile), but expands beautifully for PC.
+
+Database Schema:
+
+Users: (Email, Name, Role, Location, Rating)
+
+Listings: (Title, Description, Price [0-5000], Category, Age, Images, VideoURL, SellerID, Status [Available/Sold])
+
+Transactions: (BuyerID, SellerID, Amount, EscrowStatus)
+
+A few "BebeMart" Copywriting Gems to use:
+Tagline: Big Love for Little Prices.
+
+Empty State Message: "Your nursery looks a bit empty! Browse our 5k finds."
+
+Seller Prompt: "Your child grew up, but their clothes don't have to go to waste. Turn clutter into 5k today."

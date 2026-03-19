@@ -1,0 +1,21 @@
+packages:
+  "framer-motion": "For playful page transitions and micro-interactions"
+  "@hookform/resolvers": "Zod validation for complex forms"
+  "date-fns": "For formatting human-readable dates"
+  "clsx": "For conditional class names"
+  "tailwind-merge": "For merging tailwind classes"
+
+images:
+  - path: "artifacts/bebemart/public/images/hero-bg.png"
+    description: "Playful abstract pastel background with mint green, sky blue, and lemon yellow soft wavy shapes, childlike and warm, flat vector style"
+    aspect_ratio: "16:9"
+  - path: "artifacts/bebemart/public/images/empty-nursery.png"
+    description: "Cute illustration of an empty nursery room with soft pastel colors, a single toy box, warm and inviting, flat vector art"
+    aspect_ratio: "1:1"
+  - path: "artifacts/bebemart/public/images/gift-badge.png"
+    description: "A shiny playful badge icon with a wrapped gift box, sparkling with soft yellow and orange colors"
+    aspect_ratio: "1:1"
+
+notes:
+  - "Using generated hooks from @workspace/api-client-react"
+  - "Authentication session is managed via cookies; useGetMe determines auth state"
