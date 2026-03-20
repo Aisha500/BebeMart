@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useGetListings } from "@workspace/api-client-react";
 import { ListingCard } from "@/components/ListingCard";
-import { Search, ArrowRight, Baby, Shirt, Puzzle, BookOpen, CarFront } from "lucide-react";
+import { Search, ArrowRight, Baby, Shirt, Puzzle, BookOpen, CarFront, ShoppingBag, ShieldCheck, Truck, BadgeCheck, HandCoins } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "wouter";
 
@@ -88,6 +88,83 @@ export default function Home() {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-16 px-4 bg-gradient-to-b from-white to-sky-50/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <Badge className="mb-4 bg-primary/10 text-primary border-none font-bold px-4 py-1.5 text-sm rounded-full">
+              Safe &amp; Secure Shopping
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">
+              How BebeMart Protects You
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+              Your money never goes directly to the seller. We hold it safely until you receive your item — that's our escrow promise.
+            </p>
+          </div>
+
+          <div className="relative">
+            {/* Connecting line */}
+            <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-primary/20 via-primary/60 to-primary/20 z-0" />
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
+              {[
+                {
+                  icon: <ShoppingBag className="w-7 h-7" />,
+                  color: "bg-sky-100 text-sky-600",
+                  ring: "ring-sky-200",
+                  step: "1",
+                  title: "Browse & Buy",
+                  desc: "Find a great item and tap \"Buy Now with Escrow\" to begin your purchase.",
+                },
+                {
+                  icon: <ShieldCheck className="w-7 h-7" />,
+                  color: "bg-emerald-100 text-emerald-600",
+                  ring: "ring-emerald-200",
+                  step: "2",
+                  title: "We Hold Your Money",
+                  desc: "Your payment is held securely by BebeMart — the seller cannot touch it yet.",
+                },
+                {
+                  icon: <Truck className="w-7 h-7" />,
+                  color: "bg-yellow-100 text-yellow-600",
+                  ring: "ring-yellow-200",
+                  step: "3",
+                  title: "Seller Ships It",
+                  desc: "The seller ships the item and marks it as sent. You'll be notified to watch out for it.",
+                },
+                {
+                  icon: <HandCoins className="w-7 h-7" />,
+                  color: "bg-orange-100 text-orange-600",
+                  ring: "ring-orange-200",
+                  step: "4",
+                  title: "Confirm & Pay Released",
+                  desc: "Once you confirm delivery, funds are released to the seller. Everyone wins!",
+                },
+              ].map((item) => (
+                <div key={item.step} className="flex flex-col items-center text-center group">
+                  <div className={`relative w-24 h-24 rounded-full ${item.color} ring-4 ${item.ring} flex items-center justify-center shadow-md mb-5 group-hover:scale-105 transition-transform`}>
+                    {item.icon}
+                    <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-foreground text-background text-xs font-black flex items-center justify-center shadow">
+                      {item.step}
+                    </span>
+                  </div>
+                  <h3 className="font-display font-bold text-xl text-foreground mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground text-base leading-relaxed max-w-[220px]">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 bg-emerald-50 border border-emerald-200 rounded-3xl p-6">
+            <BadgeCheck className="w-10 h-10 text-emerald-600 flex-shrink-0" />
+            <p className="text-base text-emerald-800 font-medium text-center sm:text-left">
+              <strong>BebeMart Buyer Guarantee:</strong> If your item never arrives or is significantly different from the listing, you get a full refund. No stress, no wahala.
+            </p>
           </div>
         </div>
       </section>
