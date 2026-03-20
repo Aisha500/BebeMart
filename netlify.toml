@@ -6,6 +6,10 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Required environment variable — set this in Netlify:
+# VITE_API_BASE_URL = https://your-replit-api-url.replit.app
+# (the URL where your Replit API server is deployed — find it in your Replit deployments tab)
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
