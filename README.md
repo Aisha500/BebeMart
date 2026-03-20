@@ -1,6 +1,6 @@
 # BebeMart
 
-BebeMart is a community-driven, hyper-local marketplace designed to make children's essentials affordable for every Nigerian parent. By implementing a strict price cap and a unique Gift-It-Forward system, BebeMart ensures that quality clothes, toys, and gear remain accessible despite economic inflation.
+BebeMart is a community-driven, hyper-local marketplace designed to make children's essentials affordable for every Nigerian parents. By implementing a strict price cap and a unique Gift-It-Forward system, BebeMart ensures that quality clothes, toys, and gear remain accessible despite economic inflation.
 
 ## Project Overview
 This version of BebeMart was developed using Replit's environment. It focuses on core marketplace functionality, including item listings, price filtering, and local categorization.
