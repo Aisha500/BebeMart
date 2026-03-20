@@ -1,0 +1,12 @@
+[build]
+  base = "artifacts/bebemart"
+  command = "cd ../.. && npm install -g pnpm@latest && pnpm install && pnpm --filter @workspace/api-spec run codegen && pnpm --filter @workspace/bebemart run build:netlify"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -275,19 +275,38 @@ async function parseSuccessBody(
   }
 }
 
+function applyApiBaseUrl(input: RequestInfo | URL): RequestInfo | URL {
+  const apiBase =
+    typeof import.meta !== "undefined" &&
+    // @ts-ignore
+    typeof import.meta.env !== "undefined"
+      ? // @ts-ignore
+        (import.meta.env.VITE_API_BASE_URL as string | undefined)
+      : undefined;
+
+  if (!apiBase) return input;
+
+  const url = resolveUrl(input);
+  if (url.startsWith("/")) {
+    return `${apiBase.replace(/\/$/, "")}${url}`;
+  }
+  return input;
+}
+
 export async function customFetch<T = unknown>(
   input: RequestInfo | URL,
   options: CustomFetchOptions = {},
 ): Promise<T> {
   const { responseType = "auto", headers: headersInit, ...init } = options;
 
-  const method = resolveMethod(input, init.method);
+  const resolvedInput = applyApiBaseUrl(input);
+  const method = resolveMethod(resolvedInput, init.method);
 
   if (init.body != null && (method === "GET" || method === "HEAD")) {
     throw new TypeError(`customFetch: ${method} requests cannot have a body.`);
   }
 
-  const headers = mergeHeaders(isRequest(input) ? input.headers : undefined, headersInit);
+  const headers = mergeHeaders(isRequest(resolvedInput) ? resolvedInput.headers : undefined, headersInit);
 
   if (
     typeof init.body === "string" &&
@@ -301,9 +320,9 @@ export async function customFetch<T = unknown>(
     headers.set("accept", DEFAULT_JSON_ACCEPT);
   }
 
-  const requestInfo = { method, url: resolveUrl(input) };
+  const requestInfo = { method, url: resolveUrl(resolvedInput) };
 
-  const response = await fetch(input, { ...init, method, headers });
+  const response = await fetch(resolvedInput, { ...init, method, headers, credentials: "include" });
 
   if (!response.ok) {
     const errorData = await parseErrorBody(response, method);
