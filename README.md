@@ -46,6 +46,12 @@ If you are cloning this repository, ensure you have Node.js installed:
 1. **Enable Corepack:**
    ```bash
    corepack enable
+   ```
+2. **Install Dependencies:**
+   ```bash
    pnpm install
+   ```
+3. **Run Development Server:**
+   ```bash
    pnpm --filter @workspace/bebemart run dev
    ```
