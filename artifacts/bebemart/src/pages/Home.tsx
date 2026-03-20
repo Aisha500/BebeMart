@@ -92,8 +92,58 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Featured Listings */}
+      <section className="py-16 px-4 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-end mb-10">
+            <div>
+              <h2 className="text-3xl font-display font-bold text-foreground mb-2">Fresh Finds</h2>
+              <p className="text-muted-foreground text-lg">Just listed by parents near you</p>
+            </div>
+            <Link href="/browse">
+              <Button variant="ghost" className="hidden sm:flex rounded-full text-primary hover:text-primary hover:bg-primary/10 font-bold group">
+                View All <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+
+          {isLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} className="rounded-3xl bg-white p-4 h-80 animate-pulse border border-border">
+                  <div className="w-full h-48 bg-muted rounded-2xl mb-4"></div>
+                  <div className="w-3/4 h-6 bg-muted rounded mb-2"></div>
+                  <div className="w-1/2 h-4 bg-muted rounded"></div>
+                </div>
+              ))}
+            </div>
+          ) : listingsData?.listings && listingsData.listings.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {listingsData.listings.map(listing => (
+                <ListingCard key={listing.id} listing={listing} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20 bg-white rounded-3xl border border-border">
+              <img src={`${import.meta.env.BASE_URL}images/empty-nursery.png`} alt="Empty" className="w-48 h-48 mx-auto opacity-80 mb-6" />
+              <h3 className="text-2xl font-bold text-foreground mb-2">It's a bit quiet here</h3>
+              <p className="text-muted-foreground mb-6">Be the first to list an item in the marketplace!</p>
+              <Link href="/sell">
+                <Button className="rounded-full px-8 py-6 text-lg font-bold hover-elevate shadow-lg">Start Selling</Button>
+              </Link>
+            </div>
+          )}
+
+          <div className="mt-8 text-center sm:hidden">
+            <Link href="/browse">
+              <Button variant="outline" className="rounded-full w-full border-2">View All Listings</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* How It Works */}
-      <section className="py-16 px-4 bg-gradient-to-b from-white to-sky-50/50">
+      <section className="py-16 px-4 bg-gradient-to-b from-background to-sky-50/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-primary/10 text-primary border-none font-bold px-4 py-1.5 text-sm rounded-full">
@@ -108,9 +158,7 @@ export default function Home() {
           </div>
 
           <div className="relative">
-            {/* Connecting line */}
             <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-primary/20 via-primary/60 to-primary/20 z-0" />
-
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
               {[
                 {
@@ -165,56 +213,6 @@ export default function Home() {
             <p className="text-base text-emerald-800 font-medium text-center sm:text-left">
               <strong>BebeMart Buyer Guarantee:</strong> If your item never arrives or is significantly different from the listing, you get a full refund. No stress, no wahala.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Listings */}
-      <section className="py-16 px-4 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-end mb-10">
-            <div>
-              <h2 className="text-3xl font-display font-bold text-foreground mb-2">Fresh Finds</h2>
-              <p className="text-muted-foreground text-lg">Just listed by parents near you</p>
-            </div>
-            <Link href="/browse">
-              <Button variant="ghost" className="hidden sm:flex rounded-full text-primary hover:text-primary hover:bg-primary/10 font-bold group">
-                View All <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </div>
-
-          {isLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[1, 2, 3, 4].map(i => (
-                <div key={i} className="rounded-3xl bg-white p-4 h-80 animate-pulse border border-border">
-                  <div className="w-full h-48 bg-muted rounded-2xl mb-4"></div>
-                  <div className="w-3/4 h-6 bg-muted rounded mb-2"></div>
-                  <div className="w-1/2 h-4 bg-muted rounded"></div>
-                </div>
-              ))}
-            </div>
-          ) : listingsData?.listings && listingsData.listings.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {listingsData.listings.map(listing => (
-                <ListingCard key={listing.id} listing={listing} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20 bg-white rounded-3xl border border-border">
-              <img src={`${import.meta.env.BASE_URL}images/empty-nursery.png`} alt="Empty" className="w-48 h-48 mx-auto opacity-80 mb-6" />
-              <h3 className="text-2xl font-bold text-foreground mb-2">It's a bit quiet here</h3>
-              <p className="text-muted-foreground mb-6">Be the first to list an item in the marketplace!</p>
-              <Link href="/sell">
-                <Button className="rounded-full px-8 py-6 text-lg font-bold hover-elevate shadow-lg">Start Selling</Button>
-              </Link>
-            </div>
-          )}
-
-          <div className="mt-8 text-center sm:hidden">
-            <Link href="/browse">
-              <Button variant="outline" className="rounded-full w-full border-2">View All Listings</Button>
-            </Link>
           </div>
         </div>
       </section>
