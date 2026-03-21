@@ -2,10 +2,13 @@
 
 **BebeMart** is a community-driven, hyper-local marketplace designed to make children's essentials affordable for every Nigerian parent. By implementing a strict price cap and a unique "Gift-It-Forward" system, BebeMart ensures that quality clothes, toys, and gear remain accessible despite economic inflation.
 
-## The Mission
-In an economy where the cost of new imported children's items has skyrocketed, BebeMart provides a platform for parents to declutter responsibly and for other families to acquire necessary items at a fraction of their retail price.
+## 🔗 Live Deployment
+**View the live site here:** [https://bebe-mart.netlify.app](https://bebe-mart.netlify.app)
 
 ---
+
+## The Mission
+In an economy where the cost of new imported children's items has skyrocketed, BebeMart provides a platform for parents to declutter responsibly and for other families to acquire necessary items at a fraction of their retail price.
 
 ## Key Features
 
@@ -27,21 +30,21 @@ This project is structured as a **monorepo** to maintain strict synchronization 
 
 * **Frontend:** React with Vite & TypeScript
 * **Styling:** Tailwind CSS
-* **Environment:** Node.js 20
 * **Package Management:** pnpm (via Corepack)
 * **Deployment:** Netlify (Continuous Deployment via GitHub)
+
+### Asset Management
+Product imagery (e.g., rompers, strollers) is hosted locally within the `/public/assets` directory. This ensures that the marketplace remains fully functional as a static site without dependency on external API servers for media rendering.
 
 ### Deployment Configuration
 The project is optimized for Netlify using a `netlify.toml` configuration:
 * **Base Directory:** `artifacts/bebemart`
-* **Build Command:** Automates API codegen and frontend compilation using `pnpm`.
-* **Routing:** Single Page Application (SPA) redirects are enabled to support direct URL navigation and page refreshes.
+* **Build Command:** Automates API codegen and frontend compilation.
+* **Routing:** SPA redirects are enabled to support direct URL navigation.
 
 ---
 
 ## How to Run Locally
-
-If you are cloning this repository, ensure you have Node.js installed:
 
 1. **Enable Corepack:**
    ```bash
