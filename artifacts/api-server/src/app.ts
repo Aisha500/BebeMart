@@ -9,18 +9,19 @@ const app: Express = express();
 
 const isProduction = process.env.NODE_ENV === "production";
 
+const httpLogger = (pinoHttp as any).default || pinoHttp;
 app.use(
-  pinoHttp({
+  httpLogger({
     logger,
     serializers: {
-      req(req) {
+      req(req: any) {
         return {
           id: req.id,
           method: req.method,
           url: req.url?.split("?")[0],
         };
       },
-      res(res) {
+      res(res: any) {
         return {
           statusCode: res.statusCode,
         };
