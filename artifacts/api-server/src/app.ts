@@ -1,17 +1,18 @@
 import express, { type Express } from "express";
 import cors from "cors";
-import pinoHttp from "pino-http";
+import * as pinoHttpModule from "pino-http";
 import session from "express-session";
 import router from "./routes";
 import { logger } from "./lib/logger";
+
+const pinoHttp = (pinoHttpModule as any).default || pinoHttpModule;
 
 const app: Express = express();
 
 const isProduction = process.env.NODE_ENV === "production";
 
-const httpLogger = (pinoHttp as any).default || pinoHttp;
 app.use(
-  httpLogger({
+  pinoHttp({
     logger,
     serializers: {
       req(req: any) {
