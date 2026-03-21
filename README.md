@@ -1,6 +1,6 @@
 # BebeMart
 
-**BebeMart** is a community-driven, hyper-local marketplace designed to make children's essentials affordable for every Nigerian parent. By implementing a strict price cap and a unique "Gift-It-Forward" system, BebeMart ensures that quality clothes, toys, and gear remain accessible despite economic inflation.
+**BebeMart** is a community-driven, hyper-local marketplace designed to make children's essentials affordable for Nigerian parents. By implementing a strict price cap and a unique "Gift-It-Forward" system, BebeMart ensures that quality clothes, toys, and gear remain accessible despite economic inflation.
 
 ## 🔗 Live Deployment
 **View the live site here:** [https://bebe-mart.netlify.app](https://bebe-mart.netlify.app)
