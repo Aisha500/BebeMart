@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useLocation } from "wouter";
+import { getStaticListingDetail } from "@/data/static-listings";
 
 export default function ListingDetail() {
   const [, params] = useRoute("/listings/:id");
@@ -23,8 +24,10 @@ export default function ListingDetail() {
   const [buyDialogOpen, setBuyDialogOpen] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState("");
 
-  const { data: listing, isLoading } = useGetListingById(listingId);
-  
+  const { data: apiListing, isLoading, isError } = useGetListingById(listingId);
+  const staticListing = getStaticListingDetail(listingId);
+  const listing = apiListing || staticListing;
+
   const buyMutation = useCreateTransaction({
     mutation: {
       onSuccess: () => {
@@ -51,7 +54,7 @@ export default function ListingDetail() {
     buyMutation.mutate({ data: { listingId, deliveryAddress } });
   };
 
-  if (isLoading || !listing) {
+  if ((isLoading && !isError) || !listing) {
     return (
       <AppLayout>
         <div className="max-w-6xl mx-auto p-4 py-8 animate-pulse">

@@ -8,6 +8,7 @@ import { ListingCard } from "@/components/ListingCard";
 import { Search, ArrowRight, Baby, Shirt, Puzzle, BookOpen, CarFront, ShoppingBag, ShieldCheck, Truck, BadgeCheck, HandCoins } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "wouter";
+import { staticListings } from "@/data/static-listings";
 
 const CATEGORIES = [
   { name: "Clothes", icon: <Shirt className="w-6 h-6" />, color: "bg-pink-100 text-pink-600" },
@@ -21,7 +22,10 @@ export default function Home() {
   const [_, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { data: listingsData, isLoading } = useGetListings({ limit: 8 });
+  const { data: listingsData, isLoading, isError } = useGetListings({ limit: 8 });
+  const displayListings = (listingsData?.listings && listingsData.listings.length > 0)
+    ? listingsData.listings
+    : staticListings.slice(0, 8);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,7 +111,7 @@ export default function Home() {
             </Link>
           </div>
 
-          {isLoading ? (
+          {isLoading && !isError ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[1, 2, 3, 4].map(i => (
                 <div key={i} className="rounded-3xl bg-white p-4 h-80 animate-pulse border border-border">
@@ -117,9 +121,9 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          ) : listingsData?.listings && listingsData.listings.length > 0 ? (
+          ) : displayListings.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {listingsData.listings.map(listing => (
+              {displayListings.map(listing => (
                 <ListingCard key={listing.id} listing={listing} />
               ))}
             </div>

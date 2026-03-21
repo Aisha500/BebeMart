@@ -7,6 +7,7 @@ import { ListingCard } from "@/components/ListingCard";
 import { Filter, SlidersHorizontal, X } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
+import { filterStaticListings } from "@/data/static-listings";
 
 export default function Browse() {
   const [params, setParams] = useState<Record<string, any>>({});
@@ -22,7 +23,9 @@ export default function Browse() {
     setParams(initialParams);
   }, []);
 
-  const { data, isLoading } = useGetListings(params);
+  const { data, isLoading, isError } = useGetListings(params);
+  const staticData = filterStaticListings(params);
+  const displayData = (data?.listings && data.listings.length > 0) ? data : staticData;
 
   const updateParam = (key: string, value: any) => {
     setParams(prev => {
@@ -46,7 +49,7 @@ export default function Browse() {
               {params.giftItForward ? "Gift It Forward Items" : "Browse Market"}
             </h1>
             <p className="text-muted-foreground mt-2 text-lg">
-              {data?.total || 0} wonderful finds waiting for a new home
+              {displayData.total || 0} wonderful finds waiting for a new home
             </p>
           </div>
 
@@ -168,7 +171,7 @@ export default function Browse() {
         )}
 
         {/* Grid */}
-        {isLoading ? (
+        {isLoading && !isError ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
               <div key={i} className="rounded-3xl bg-white p-4 h-80 animate-pulse border border-border">
@@ -178,9 +181,9 @@ export default function Browse() {
               </div>
             ))}
           </div>
-        ) : data?.listings && data.listings.length > 0 ? (
+        ) : displayData.listings.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {data.listings.map(listing => (
+            {displayData.listings.map(listing => (
               <ListingCard key={listing.id} listing={listing} />
             ))}
           </div>
