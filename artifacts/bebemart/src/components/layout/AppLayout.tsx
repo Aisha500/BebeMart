@@ -18,14 +18,14 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-background pb-20 md:pb-0">
-      {/* Desktop Header */}
+      {/* Header */}
       <header className="sticky top-0 z-50 glass-card border-b border-white/50 px-4 py-3 md:px-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2 hover-elevate">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-md">
-              <Heart className="text-white w-6 h-6 fill-white" />
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+          <Link href="/" className="flex items-center gap-2 hover-elevate flex-shrink-0">
+            <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-md">
+              <Heart className="text-white w-5 h-5 md:w-6 md:h-6 fill-white" />
             </div>
-            <span className="font-display font-bold text-2xl text-foreground hidden sm:block">
+            <span className="font-display font-bold text-xl md:text-2xl text-foreground">
               Bebe<span className="text-primary">Mart</span>
             </span>
           </Link>
@@ -79,14 +79,32 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             )}
           </nav>
           
-          {/* Mobile Search Icon Only */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-1">
             <Link href="/browse">
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Search className="w-6 h-6" />
+              <Button variant="ghost" size="icon" className="rounded-full w-9 h-9">
+                <Search className="w-5 h-5" />
               </Button>
             </Link>
+            {!isAuthenticated && (
+              <Link href="/auth">
+                <Button size="sm" className="rounded-full font-bold text-xs px-3 h-8 shadow-md bg-primary text-primary-foreground">
+                  Login
+                </Button>
+              </Link>
+            )}
           </div>
+        </div>
+
+        {/* Mobile Search Bar */}
+        <div className="md:hidden mt-2 max-w-7xl mx-auto">
+          <form onSubmit={handleSearch} className="relative group">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4 group-focus-within:text-primary transition-colors" />
+            <Input 
+              name="q"
+              placeholder="Search clothes, toys, gear..." 
+              className="w-full pl-10 pr-4 h-10 rounded-full border-2 border-border bg-white shadow-sm focus-visible:ring-primary focus-visible:border-primary text-sm"
+            />
+          </form>
         </div>
       </header>
 
