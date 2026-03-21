@@ -89,7 +89,10 @@ export default function ListingDetail() {
               <img 
                 src={listing.images[0] || "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800"} 
                 className="w-full h-full object-cover"
-                alt={listing.title} 
+                alt={listing.title}
+                decoding="async"
+                width={800}
+                height={800}
               />
               {!isAvailable && (
                 <div className="absolute inset-0 bg-white/60 backdrop-blur-md flex items-center justify-center">

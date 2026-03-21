@@ -21,6 +21,10 @@ export function ListingCard({ listing }: ListingCardProps) {
           <img 
             src={mainImage} 
             alt={listing.title} 
+            loading="lazy"
+            decoding="async"
+            width={400}
+            height={400}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           {listing.status !== 'available' && (
